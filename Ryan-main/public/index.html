@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audible IQ</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Audio Test -->
+  <script>
+    // Takes an audio element's id and plays it. 
+    // Can be used as the onended attribute to play files sequentially
+    function playAudio(audioId) {
+      var audio = document.getElementById(audioId);
+      audio.play();
+    }
+  </script>
+
+  <!-- Audio files are hidden by default -->
+  <audio id="leftAudio" onended="playAudio('rightAudio')" src="./audio/AudioTest/left_sine.mp3"></audio>
+  <audio id="rightAudio" onended="playAudio('centerAudio')" src="./audio/AudioTest/right_sine.mp3"></audio>
+  <audio id="centerAudio" src="./audio/AudioTest/center_sine.mp3"></audio>
+
+  <!--nav bar code-->
+  <nav class="navbar">
+    <a href="/" id="logoLink">
+      <h1 id="logo">Audible IQ <i class="fa-solid fa-headphones-simple"></i></h1>
+    </a>
+    <button id="audioTestButton" onclick="playAudio('leftAudio')">Test Audio</button>
+  </nav>
+
+  <!--Adds whatever is inside test-container class here -->
+  <div id="test-container">
+
+  </div>
+
+  <!--activity widgets-->
+  <script>
+    // upon html load perform the following code
+    document.addEventListener("DOMContentLoaded", () => {
+
+      // add more widgets here
+      const testWidget = [
+        { name: "Audio Delay Test", color: "#FFFFFF", icon: "fa-solid fa-ear-listen", description: "Play an audio delay test.", link: "./view/pages/test.html", datalink: "./view/pages/datapage.html" },
+        { name: "Perfect Pitch Test", color: "#FFFFFF", icon: "fa-solid fa-music", description: "Test your pitch perception.", link: "./view/pages/test.html", datalink: "./view/pages/datapage.html" }
+      ];
+
+      // finds <div> that has an id of test-container and puts it in
+      const container = document.getElementById("test-container");
+
+      // loops through all testWidgets it adds it to the class list and sets the color
+      testWidget.forEach(test => {
+        const card = document.createElement("div");
+        card.classList.add("test-widget");
+        card.style.backgroundColor = test.color;
+
+        // imbedded HTML code for each specific widget
+        card.innerHTML = `
+            <i class="${test.icon}"></i>
+            <h2>${test.name}</h2>
+            <p>${test.description}</p>
+            <div class="button-container">
+                <button onclick="location.href='${test.link}'">Go!</button>
+                <button onclick="location.href='${test.datalink}'">Data</button>
+            </div>
+        `;
+        // adds widget into test-container class 
+        container.appendChild(card);
+      });
+
+    });
+  </script>
+
+  <!--Contact Section-->
+  <div style="text-align: center; margin-top: 20px;">
+    <button id="contact-btn">Contact</button>
+    <div id="contact-info" style="display: none; margin-top: 10px;"></div>
+  </div>
+
+  <!-- Link to the controller script -->
+  <script src="./controller/controller.js"></script>
+
+</body>
+
+</html>

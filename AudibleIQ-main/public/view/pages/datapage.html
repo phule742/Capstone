@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Page</title>
+
+    <div id="header-placeholder"></div>
+
+    <script>
+        fetch("/view/header.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("header-placeholder").innerHTML = data;
+
+                // Load and execute header.js after header is inserted
+                const script = document.createElement("script");
+                script.src = "/controller/header.js";
+                script.onload = () => console.log("header.js loaded successfully.");
+                document.body.appendChild(script);
+
+                // Load and execute audioController.js
+                const audioScript = document.createElement("script");
+                audioScript.src = "/controller/audioController.js";
+                audioScript.onload = () => console.log("audioController.js loaded successfully.");
+                document.body.appendChild(audioScript);
+            })
+            .catch(error => console.error("Error loading header:", error));
+
+    </script>
+
+</head>
+<body>
+    <h1>Data Page</h1>
+    <button class="test-btn" data-value="1">1</button> <span id="count1">0</span> presses<br>
+    <button class="test-btn" data-value="2">2</button> <span id="count2">0</span> presses<br>
+    <button class="test-btn" data-value="3">3</button> <span id="count3">0</span> presses<br>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script src="/controller/dataHandler.js"></script>
+    <script>
+        updateDatabase("TestModule", "test-btn");
+    </script>
+</body>
+</html>

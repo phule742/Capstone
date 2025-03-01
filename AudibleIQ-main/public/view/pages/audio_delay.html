@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Audio Delay Test Page -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Delay Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        h2 {
+            display: inline-block;
+            font-size: 50px;
+            padding: 20px 40px;
+            color: black;
+            background-color: white;
+            border-radius: 5px;
+        }
+    </style>
+
+    <div id="header-placeholder"></div>
+
+    <script>
+        fetch("/view/header.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("header-placeholder").innerHTML = data;
+
+                // Load and execute header.js after header is inserted
+                const script = document.createElement("script");
+                script.src = "/controller/header.js";
+                script.onload = () => console.log("header.js loaded successfully.");
+                document.body.appendChild(script);
+
+                // Load and execute audioController.js
+                const audioScript = document.createElement("script");
+                audioScript.src = "/controller/audioController.js";
+                audioScript.onload = () => console.log("audioController.js loaded successfully.");
+                document.body.appendChild(audioScript);
+            })
+            .catch(error => console.error("Error loading header:", error));
+
+    </script>
+</head>
+
+<body>
+    <div class="content">
+
+        <h2 id="logo">Audio Delay <i class="fa-solid fa-ear-listen"></i></h2>
+
+        <p>This is the description and instructions for the activity.</p>
+
+        <div class="button-container">
+            <button onclick="location.href='/*Activity Interaction Page Path*/'">Start</button>
+            <button onclick="location.href='/view/pages/datapage.html'">Data</button>
+            <button onclick="location.href='/index.html'">Back Home</button>
+        </div>
+    </div>
+</body>
+
+</html>

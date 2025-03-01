@@ -1,0 +1,49 @@
+<!-- The html for the site-wide consistent header. Add the commented code to ALL PAGES -->
+<div class="navbar" id="main-header">
+    <!-- Home Icon (Left) -->
+    <a href="/index.html" class="header-icon">
+        <i class="fa-solid fa-home"></i>
+    </a>
+    
+    <!-- Header Title -->
+    <h1 id="logo"><i class="fa-solid fa-a"></i><i class="fa-solid fa-u"></i><i class="fa-solid fa-d"></i><i class="fa-solid fa-i"></i><i class="fa-solid fa-b"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-e"></i>
+        
+        <i class="fa-solid fa-microphone"></i><i class="fa-solid fa-q"></i></h1>
+    
+    <!-- Test Audio Button (Right) -->
+    <button id="audioTestButton" onclick="playAudio('leftAudio')" class="fa-solid fa-volume-high"> Test Audio</button></div>
+
+<!-- Audio Test -->
+<audio id="leftAudio" onended="playAudio('rightAudio')" src="/audio/AudioTest/left_sine.mp3"></audio>
+<audio id="rightAudio" onended="playAudio('centerAudio')" src="/audio/AudioTest/right_sine.mp3"></audio>
+<audio id="centerAudio" src="/audio/AudioTest/center_sine.mp3"></audio>
+
+
+<!-- Add the following to every web page's head html for the website header
+    
+
+<div id="header-placeholder"></div>
+
+    <script>
+        fetch("/view/header.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("header-placeholder").innerHTML = data;
+
+                // Load and execute header.js after header is inserted
+                const script = document.createElement("script");
+                script.src = "/controller/header.js";
+                script.onload = () => console.log("header.js loaded successfully.");
+                document.body.appendChild(script);
+
+                // Load and execute audioController.js
+                const audioScript = document.createElement("script");
+                audioScript.src = "/controller/audioController.js";
+                audioScript.onload = () => console.log("audioController.js loaded successfully.");
+                document.body.appendChild(audioScript);
+            })
+            .catch(error => console.error("Error loading header:", error));
+
+    </script>
+
+!-->

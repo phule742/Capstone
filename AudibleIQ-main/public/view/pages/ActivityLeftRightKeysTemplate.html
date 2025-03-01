@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Left Right Template Page -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Left Right Key Template</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/styles.css">
+    
+    <div id="header-placeholder"></div>
+    
+    <script>
+        fetch("/view/header.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("header-placeholder").innerHTML = data;
+                
+                // Load and execute header.js after header is inserted
+                const script = document.createElement("script");
+                script.src = "/public/controller/header.js";
+                script.onload = () => console.log("header.js loaded successfully.");
+                document.body.appendChild(script);
+            })
+            .catch(error => console.error("Error loading header:", error));
+    </script>
+</head>
+
+<body>
+
+    <div class="content">
+        <!--Title of template-->
+        <h3 id="logo">
+            Left Right Template <i class="fa-solid fa-arrows-left-right"></i>
+        </h3>
+
+        <div class="button-container">
+            <button onclick="location.href='/index.html'">Back Home</button>
+        </div>
+
+
+        <div id="textDisplay">Press the Left or Right Arrow Key</div>
+        <!--Arrow key box, styling info in styles.css-->
+        <div class="arrow-container">
+            <div id="leftArrow" class="arrow">
+                <i class="fa-solid fa-arrow-left"></i>
+            </div>
+            <div id="rightArrow" class="arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </div>
+    </div>
+
+    <!--Connected to keyboardController.js under /controller-->
+    <script src="/controller/keyboardController.js"></script>
+
+</body>
+</html>

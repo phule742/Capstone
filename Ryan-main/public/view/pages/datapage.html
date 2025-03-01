@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Page</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <h1>Data Page</h1>
+    <a href="../../index.html">Back to Home</a>
+    <button class="test-btn" data-value="1">1</button> <span id="count1">0</span> presses<br>
+    <button class="test-btn" data-value="2">2</button> <span id="count2">0</span> presses<br>
+    <button class="test-btn" data-value="3">3</button> <span id="count3">0</span> presses<br>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script src="../../model/dataHandler.js"></script>
+    <script>
+        updateDatabase("TestModule", "test-btn");
+    </script>
+</body>
+</html>

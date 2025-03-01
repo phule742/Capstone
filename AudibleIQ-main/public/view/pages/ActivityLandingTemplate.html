@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- This page is the template for an activity area's landing page
+    Copy this and customize  further for each page -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity area template</title>
+    <div id="header-placeholder"></div>
+
+    <script>
+        fetch("/view/header.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("header-placeholder").innerHTML = data;
+
+                // Load and execute header.js after header is inserted
+                const script = document.createElement("script");
+                script.src = "/controller/header.js";
+                script.onload = () => console.log("header.js loaded successfully.");
+                document.body.appendChild(script);
+
+                // Load and execute audioController.js
+                const audioScript = document.createElement("script");
+                audioScript.src = "/controller/audioController.js";
+                audioScript.onload = () => console.log("audioController.js loaded successfully.");
+                document.body.appendChild(audioScript);
+            })
+            .catch(error => console.error("Error loading header:", error));
+
+    </script>
+</head>
+
+<body>
+
+    <div class="content">
+        <p>This is the description and instructions for the activity.</p>
+    </div>
+    <div class="button-container">
+        <button onclick="location.href='/*Activity Interaction Page Path*/'">Start</button>
+        <button onclick="location.href='/view/pages/datapage.html'">Data</button>
+    </div>
+
+
+
+
+
+
+</body>
+
+</html>

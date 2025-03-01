@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audible IQ</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <div id="header-placeholder"></div>
+
+
+
+
+  <script>
+    fetch("/view/header.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("header-placeholder").innerHTML = data;
+
+        // Load and execute header.js after header is inserted
+        const script = document.createElement("script");
+        script.src = "/controller/header.js";
+        script.onload = () => console.log("header.js loaded successfully.");
+        document.body.appendChild(script);
+
+        // Load and execute audioController.js
+        const audioScript = document.createElement("script");
+        audioScript.src = "/controller/audioController.js";
+        audioScript.onload = () => console.log("audioController.js loaded successfully.");
+        document.body.appendChild(audioScript);
+      })
+      .catch(error => console.error("Error loading header:", error));
+
+  </script>
+</head>
+
+<body>
+  <!--nav bar code-->
+  <!-- <nav class="navbar">
+    <h1 id="logo">Audible IQ <i class="fa-solid fa-headphones-simple"></i></h1>
+    <button id="audioTestButton" onclick="playAudio('leftAudio')">Test Audio</button>
+  </nav> -->
+
+  <!--Adds whatever is inside test-container class here -->
+  <div id="test-container">
+
+  </div>
+
+  <!--activity widgets-->
+  <script type="module">
+    // Importing widgets programatically from a class containing all its info
+    import WidgetManager from './model/widgets.js'; // Import the class
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const testWidgets = WidgetManager.getTestWidgets(); // Get the widgets
+
+      const container = document.getElementById("test-container");
+
+      testWidgets.forEach(test => {
+        const card = document.createElement("div");
+        card.classList.add("test-widget");
+        card.style.backgroundColor = test.color;
+
+        card.innerHTML = `
+                <i class="${test.icon}"></i>
+                <h2>${test.name}</h2>
+                <p>${test.description}</p>
+                <div class="button-container">
+                    <button onclick="location.href='${test.link}'">Go!</button>
+                    <button onclick="location.href='${test.datalink}'">Data</button>
+                </div>
+            `;
+
+        container.appendChild(card);
+      });
+    });
+  </script>
+
+  <!--Contact Section-->
+  <div style="text-align: center; margin-top: 20px;">
+    <button id="contact-btn">Contact</button>
+    <div id="contact-info" style="display: none; margin-top: 10px;"></div>
+  </div>
+
+  <!-- Link to the controller script -->
+  <script src="./controller/controller.js"></script>
+
+</body>
+
+</html>
