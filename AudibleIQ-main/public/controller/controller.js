@@ -1,17 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    //Existing Contact button logic
-    const contactBtn = document.getElementById("contact-btn");
+    //Contact
     const contactInfo = document.getElementById("contact-info");
-
-    if (contactBtn) {
-        contactBtn.addEventListener("click", function () {
-            if (contactInfo.style.display === "none" || contactInfo.style.display === "") {
-                contactInfo.innerHTML = "Contact us: example@gmail.com";
-                contactInfo.style.display = "block";
-            } else {
-                contactInfo.style.display = "none";
-            }
-        });
+    if (contactInfo) {
+        contactInfo.innerHTML = "Contact us: example@gmail.com";
+        contactInfo.style.display = "block";
     }
 
     //Add instructional prompts dynamically to questions
