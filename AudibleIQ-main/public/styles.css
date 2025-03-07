@@ -191,13 +191,14 @@ h3 {
     margin-right: auto;
 }
 
-.contact-banner {
-    position: bottom;
+.contact-banner { 
+    position: fixed;
     bottom: 0;
     width: 100%;
-    background-color: blue;
-    color: white;
+    background-color: deepskyblue;
+    color: black;
     text-align: center;
     padding: 10px 0;
     font-size: 16px;
+    z-index: 1000; 
 }
